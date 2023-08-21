@@ -1,0 +1,31 @@
+{
+  "engineId": "test_ur",
+  "engineFactory": "com.actionml.engines.ur.UREngine",
+  "sparkConf": {
+    "master": "local",
+    "spark.driver-memory": "4g",
+    "spark.executor-memory": "4g",
+    "spark.serializer": "org.apache.spark.serializer.KryoSerializer",
+    "spark.kryo.registrator": "org.apache.mahout.sparkbindings.io.MahoutKryoRegistrator",
+    "spark.kryo.referenceTracking": "false",
+    "spark.kryoserializer.buffer": "300m",
+    "es.index.auto.create": "true",
+    "spark.es.nodes": "???"
+  },
+  "algorithm": {
+    "indicators": [
+      {
+        "name": "purchase"
+      },{
+        "name": "view",
+        "maxCorrelatorsPerItem": 50
+      },{
+        "name": "category-pref",
+        "maxCorrelatorsPerItem": 50,
+        "minLLR": 5.0
+      }
+    ],
+    "num": 4,
+    "trimAfter": "365 days"
+  }
+}

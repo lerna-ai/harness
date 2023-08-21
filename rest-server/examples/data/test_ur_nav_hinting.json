@@ -1,0 +1,26 @@
+{
+  "engineId": "test_ur_nav_hinting",
+  "engineFactory": "com.actionml.engines.urnavhinting.URNavHintingEngine",
+  "sparkConf": {
+    "master": "local",
+    "spark.driver-memory": "4g",
+    "spark.executor-memory": "4g",
+    "spark.serializer": "org.apache.spark.serializer.KryoSerializer",
+    "spark.kryo.registrator": "org.apache.mahout.sparkbindings.io.MahoutKryoRegistrator",
+    "spark.kryo.referenceTracking": "false",
+    "spark.kryoserializer.buffer": "300m",
+    "es.index.auto.create": "true"
+  },
+  "algorithm": {
+    "indicators": [
+      {
+        "name": "nav-event"
+      },{
+        "name": "search-terms"
+      },{
+        "name": "content-pref"
+      }
+    ],
+    "num": 6
+  }
+}
