@@ -1,4 +1,3 @@
-[![CircleCI](https://circleci.com/gh/actionml/harness.svg?style=svg)](https://circleci.com/gh/actionml/harness)
 # Harness Overview
 
 This project implements a microservice based Machine Learning Server. It provides an API for plug-in Engines and implements all services needed for input and query. It is also the platform for the Universal Recommender, which is a Harness Engine.
@@ -69,7 +68,63 @@ For installation on a host OS such as an AWS instance without Docker, the minimu
  - Some recent `nix OS
  - Services used by the Engine of your choice. For instance the UR requires Elasticsearch
 
-Each Engine has its own requirements driven by decisions like what compute engine to use (Spark, TensorFlow, Vowpal Wabbit, DL4J, etc) as well as what Libraries it may need. See specific Engines for their extra requirements. 
+Each Engine has its own requirements driven by decisions like what compute engine to use (Spark, TensorFlow, Vowpal Wabbit, DL4J, etc) as well as what Libraries it may need. See specific Engines for their extra requirements.
+
+## Development
+
+### Building the project
+
+To build the `harness` module in order to make distribution for dockerizing the app, you need to run the following command.
+
+```
+$ make dist
+```
+
+### Running in Docker
+
+All harness stack are dockerized.
+
+#### Building the Docker images
+
+Harness component has its own Docker image, and a Dockerfile exists in
+root directory to build that image.
+
+To build each module image, change to the module directory and run the
+`docker build` command, optionally specifying a tag. For example, to
+build the admin module Docker image and tag it as version 1.0, do:
+
+```
+$ docker build -t lerna/harness:1.0
+```
+
+After creating all the Docker images, you can spin up a local Docker
+environment for further development and testing.
+
+#### Running with Docker Compose
+
+Docker Compose is a tool for defining and running multi-container Docker
+applications.
+
+In the `docker` folder of the repository you can find the `docker-compose.yaml` file
+describing the MongoDB, ElasticSearch, harness-cli, and WatchTower services as well
+as the Lerna harness module that need those services.
+
+To successfully work with Docker Compose, you need to have a `.env` file
+in the `docker` folder of the repository that defines the Environment Variables passed
+to the spawned containers:
+
+```bash
+$ cd docker
+$ cp .env.sample .env
+```
+
+To start a local environment with all the components, execute the
+following from the root of the repository:
+
+```bash
+$ cd docker
+$ docker-compose up -d --build
+```
 
 # Architecture
 
