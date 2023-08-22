@@ -112,7 +112,7 @@ trait ElasticSearchResultTransformation extends JsonSearchResultTransformation[H
   override implicit val reader: Reader[Hit] =  new Reader[Hit] {
     def read(value: JValue): Hit = value match {
       case JObject(fields) if fields.exists(_._1 == "_id") && fields.exists(_._1 == "_score") =>
-        Hit(fields.find(_._1 == "_id").get._2.as[String], fields.find(_._1 == "_score").get._2.as[Float])
+        Hit(fields.find(_._1 == "_id").get._2.as[String], fields.find(_._1 == "_score").get._2.as[Float], compact(render(fields.find(_._1 == "_source").get._2)))
       case x =>
         throw new MappingException("Can't convert %s to Hit." format x)
     }
