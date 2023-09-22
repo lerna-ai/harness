@@ -38,12 +38,12 @@
         </encoder>
     </appender>
 
-    <logger name="com.actionml" level="INFO"/>
+    <logger name="com.actionml" level="WARN"/>
     <logger name="com.mongodb" level="INFO"/>
     <logger name="org.mongodb" level="INFO"/>
     <logger name="com.typesafe" level="INFO"/>
 
-    <root level="INFO">
+    <root level="WARN">
         <appender-ref ref="STDOUT" />
         <appender-ref ref="FILE" />
     </root>
