@@ -17,7 +17,7 @@ export MONGO_URI="${MONGO_URI:-mongodb://localhost:27017}"
 export ELASTICSEARCH_URI="${ELASTICSEARCH_URI:-http://localhost:9200}"
 
 # This setting helps mark spark train jobs as expired if they do not respond for this period of time
-export JOBS_EXPIRE_AFTER="12 hours"
+export JOBS_EXPIRE_AFTER=${JOBS_EXPIRE_AFTER:-12 hours}
 
 # Use only when necessary to pass options to the launcher for Harness
 # for example below we set the heap size for the JVM, otherwise the JVM has a default, which is correct in many cases

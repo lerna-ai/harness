@@ -76,7 +76,7 @@ case class SearchQuery(
   from: Int = 0 // todo: technically should be optional and changeable, but not sure sending 0 is bad in any way
 )
 
-case class Hit(id: String, score: Float)
+case class Hit(id: String, score: Float, props: String)
 
 /*
   R is the type of search result, D - type of Document

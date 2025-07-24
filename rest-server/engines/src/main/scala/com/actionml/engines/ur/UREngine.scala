@@ -302,6 +302,7 @@ object UREngine extends JsonSupport {
   case class ItemScore(
     item: ItemID, // item id
     score: Double, // used to rank, original score returned from teh search engine
+    props: String,
     ranks: Option[Map[String, Double]] = None)
 
   case class URQueryResult(

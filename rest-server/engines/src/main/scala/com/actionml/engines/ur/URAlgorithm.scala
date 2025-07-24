@@ -428,13 +428,13 @@ class URAlgorithm private (
     import scala.concurrent.ExecutionContext.Implicits.global
     val modelQuery = Await.result(buildModelQuery(query), Duration.Inf)
     val items = es.search(modelQuery)
-    URQueryResult(items.map(hit => ItemScore(hit.id, hit.score))) // todo: optionally return rankings?
+    URQueryResult(items.map(hit => ItemScore(hit.id, hit.score, hit.props))) // todo: optionally return rankings?
   }
 
   override def queryAsync(query: URQuery)(implicit ec: ExecutionContext): Future[URQueryResult] = {
     for {
       modelQuery <- buildModelQuery(query)
-      result <- es.searchAsync(modelQuery).map(items => URQueryResult(items.map(hit => ItemScore(hit.id, hit.score)))) // todo: optionally return rankings?
+      result <- es.searchAsync(modelQuery).map(items => URQueryResult(items.map(hit => ItemScore(hit.id, hit.score, hit.props)))) // optionally return rankings?
     } yield result
   }
 
